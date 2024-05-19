@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.org.jillestchuh.ktlint)
 }
 
 kotlin {
@@ -15,17 +16,19 @@ kotlin {
         browser {
             commonWebpackConfig {
                 outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
+                devServer =
+                    (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+                        static =
+                            (static ?: mutableListOf()).apply {
+                                // Serve sources to debug inside browser
+                                add(project.projectDir.path)
+                            }
                     }
-                }
             }
         }
         binaries.executable()
     }
-    
+
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -33,23 +36,23 @@ kotlin {
             }
         }
     }
-    
+
     jvm("desktop")
-    
+
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64()
+        iosSimulatorArm64(),
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
         }
     }
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
