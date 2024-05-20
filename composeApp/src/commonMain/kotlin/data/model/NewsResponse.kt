@@ -8,7 +8,7 @@ data class NewsResponse(
     @SerialName("category") val category: String,
     @SerialName("data") val data: List<News>,
     @SerialName("error") val error: String? = null,
-    @SerialName("success") val success: Boolean
+    @SerialName("success") val success: Boolean,
 )
 
 @Serializable
@@ -20,5 +20,5 @@ data class News(
     @SerialName(value = "readMoreUrl") val readMoreUrl: String?,
     @SerialName(value = "time") val time: String,
     @SerialName(value = "title") val title: String,
-    @SerialName(value = "url") val url: String
+    @SerialName(value = "url") val url: String,
 )
