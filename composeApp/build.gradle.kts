@@ -71,6 +71,9 @@ kotlin {
             implementation(libs.compose.navigation)
             implementation(libs.bundles.ktor.common)
         }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.ktor.client.java)
