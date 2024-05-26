@@ -23,26 +23,31 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import cmpnewsapp.composeapp.generated.resources.Res
 import cmpnewsapp.composeapp.generated.resources.app_name
-import data.model.CategoryModel
 import org.jetbrains.compose.resources.stringResource
 import presentation.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-fun CategoriesScreen(navController: NavController) {
+fun CategoriesScreen(
+    navController: NavController,
+    viewModel: CategoriesViewModel = viewModel { CategoriesViewModel() },
+) {
     val gridState = rememberLazyGridState()
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
     val windowSizeClass = calculateWindowSizeClass()
+    val categories by viewModel.categories.collectAsState()
 
     Scaffold(
         topBar = {
@@ -80,7 +85,7 @@ fun CategoriesScreen(navController: NavController) {
                     else -> GridCells.Adaptive(320.dp)
                 },
         ) {
-            items(Categories.categoriesList) { category ->
+            items(categories) { category ->
                 Card(
                     modifier =
                         Modifier
@@ -105,23 +110,4 @@ fun CategoriesScreen(navController: NavController) {
             }
         }
     }
-}
-
-object Categories {
-    val categoriesList =
-        mutableStateListOf(
-            CategoryModel("All", "all"),
-            CategoryModel("National", "national"),
-            CategoryModel("Business", "business"),
-            CategoryModel("Sports", "sports"),
-            CategoryModel("World", "world"),
-            CategoryModel("Politics", "politics"),
-            CategoryModel("Technology", "technology"),
-            CategoryModel("Startup", "startup"),
-            CategoryModel("Entertainment", "entertainment"),
-            CategoryModel("Miscellaneous", "miscellaneous"),
-            CategoryModel("Hatke", "hatke"),
-            CategoryModel("Science", "science"),
-            CategoryModel("Automobile", "automobile"),
-        )
 }
