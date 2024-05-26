@@ -19,11 +19,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,14 +36,13 @@ import data.model.CategoryModel
 import org.jetbrains.compose.resources.stringResource
 import presentation.navigation.Screen
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-fun CategoriesScreen(
-    navController: NavController
-) {
+fun CategoriesScreen(navController: NavController) {
     val gridState = rememberLazyGridState()
     val topAppBarState = rememberTopAppBarState()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(topAppBarState)
+    val windowSizeClass = calculateWindowSizeClass()
 
     Scaffold(
         topBar = {
@@ -68,7 +69,16 @@ fun CategoriesScreen(
                     .nestedScroll(scrollBehavior.nestedScrollConnection)
                     .padding(it),
             state = gridState,
-            columns = GridCells.Adaptive(140.dp),
+            columns =
+                when (windowSizeClass.widthSizeClass) {
+                    WindowWidthSizeClass.Compact ->
+                        GridCells.Adaptive(140.dp)
+
+                    WindowWidthSizeClass.Medium ->
+                        GridCells.Adaptive(200.dp)
+
+                    else -> GridCells.Adaptive(320.dp)
+                },
         ) {
             items(Categories.categoriesList) { category ->
                 Card(
@@ -80,10 +90,6 @@ fun CategoriesScreen(
                                 navController.navigate(Screen.NewsDetailsScreen.withArgs(category.value))
                             },
                     elevation = CardDefaults.cardElevation(10.dp),
-                    colors =
-                        CardDefaults.cardColors(
-                            containerColor = Color.White,
-                        ),
                     shape = RoundedCornerShape(8.dp),
                 ) {
                     Box(

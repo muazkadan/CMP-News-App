@@ -72,8 +72,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.compose.navigation)
             implementation(libs.bundles.ktor.common)
+            implementation(libs.stately.concurrent.collections) // needed for koin compose to work
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.compose.window.size)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

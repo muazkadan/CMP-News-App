@@ -18,6 +18,9 @@ ktlint-gradle = "12.1.1"
 compose-navigation = "2.8.0-alpha02"
 ktor = "3.0.0-wasm2"
 koin = "3.6.0-wasm-alpha2"
+koin-compose = "1.2.0-Beta4"
+statelyConcurrentCollections = "2.0.6"
+composeWindowSize = "0.5.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -34,6 +37,8 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-navigation = { group = "org.jetbrains.androidx.navigation", name="navigation-compose", version.ref = "compose-navigation" }
 
+compose-window-size = { module = "dev.chrisbanes.material3:material3-window-size-class-multiplatform", version.ref = "composeWindowSize" }
+
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-client-json = { group = "io.ktor", name = "ktor-client-json", version.ref = "ktor" }
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
@@ -47,7 +52,9 @@ ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serializatio
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
+
+stately-concurrent-collections = { module = "co.touchlab:stately-concurrent-collections", version.ref = "statelyConcurrentCollections" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
