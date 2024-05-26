@@ -77,6 +77,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.compose.window.size)
             implementation(libs.androidx.lifeCycle.viewmodel.compose)
+            implementation(libs.kotlinx.coroutines)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -84,6 +85,7 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.ktor.client.java)
+            implementation(libs.kotlinx.coroutines.swing)
         }
 
         wasmJsMain.dependencies {
