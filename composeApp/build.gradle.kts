@@ -75,9 +75,11 @@ kotlin {
             implementation(libs.stately.concurrent.collections) // needed for koin compose to work
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
             implementation(libs.compose.window.size)
             implementation(libs.androidx.lifeCycle.viewmodel.compose)
             implementation(libs.kotlinx.coroutines)
+            implementation(libs.bundles.coil.common)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

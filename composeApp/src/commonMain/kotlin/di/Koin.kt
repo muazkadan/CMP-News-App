@@ -12,6 +12,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import network.NewsApi
 import network.NewsNetworkApi
+import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import presentation.screen.details.DetailsViewModel
 
@@ -28,7 +29,7 @@ fun dataModule() =
 
 fun viewModelModule() =
     module {
-        single { DetailsViewModel(get()) }
+        viewModelOf(::DetailsViewModel)
     }
 
 fun createHttpClient() =
