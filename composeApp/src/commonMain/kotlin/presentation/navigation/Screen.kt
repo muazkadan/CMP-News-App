@@ -1,16 +1,14 @@
 package presentation.navigation
 
-sealed class Screen(val route: String) {
-    data object CategoriesScreen : Screen("categories_screen")
+import kotlinx.serialization.Serializable
 
-    data object NewsDetailsScreen : Screen("details_screen")
+@Serializable
+sealed class Screen {
+    @Serializable
+    data object CategoriesScreen : Screen()
 
-    fun withArgs(vararg args: String): String {
-        return buildString {
-            append(route)
-            args.forEach { arg ->
-                append("/$arg")
-            }
-        }
-    }
+    @Serializable
+    data class NewsDetailsScreen(
+        val category: String,
+    ) : Screen()
 }

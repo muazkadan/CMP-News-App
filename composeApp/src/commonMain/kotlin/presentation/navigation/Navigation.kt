@@ -1,13 +1,11 @@
 package presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import presentation.screen.categories.CategoriesScreen
 import presentation.screen.details.DetailsScreen
 
@@ -17,24 +15,16 @@ fun Navigation(modifier: Modifier = Modifier) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screen.CategoriesScreen.route,
+        startDestination = Screen.CategoriesScreen,
     ) {
-        composable(route = Screen.CategoriesScreen.route) {
+        composable<Screen.CategoriesScreen> {
             CategoriesScreen(
                 navController,
             )
         }
-        composable(
-            route = Screen.NewsDetailsScreen.route + "/{category}",
-            arguments =
-            listOf(
-                navArgument(name = "category") {
-                    type = NavType.StringType
-                },
-            ),
-        ) {
-            val category = remember { it.arguments?.getString("category") ?: "" }
-            DetailsScreen(navController = navController, category = category)
+        composable<Screen.NewsDetailsScreen> {
+            val newsDetailsScreen = it.toRoute<Screen.NewsDetailsScreen>()
+            DetailsScreen(navController = navController, category = newsDetailsScreen.category)
         }
     }
 }

@@ -92,7 +92,7 @@ fun CategoriesScreen(
                             .padding(8.dp)
                             .aspectRatio(2F)
                             .clickable {
-                                navController.navigate(Screen.NewsDetailsScreen.withArgs(category.value))
+                                navController.navigate(Screen.NewsDetailsScreen(category.value))
                             },
                     elevation = CardDefaults.cardElevation(10.dp),
                     shape = RoundedCornerShape(8.dp),

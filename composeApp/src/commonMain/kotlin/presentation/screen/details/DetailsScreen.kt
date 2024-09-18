@@ -9,12 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,8 +40,9 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(
-    ExperimentalMaterial3Api::class, KoinExperimentalAPI::class,
-    ExperimentalMaterial3WindowSizeClassApi::class
+    ExperimentalMaterial3Api::class,
+    KoinExperimentalAPI::class,
+    ExperimentalMaterial3WindowSizeClassApi::class,
 )
 @Composable
 fun DetailsScreen(
@@ -76,13 +77,14 @@ fun DetailsScreen(
             }
         } else {
             LazyColumn(
-                modifier = Modifier
-                    .padding(it),
+                modifier =
+                    Modifier
+                        .padding(it),
             ) {
                 items(state.news) { news ->
                     NewsCard(
                         newsItem = news,
-                        isLargeScreen = windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact
+                        isLargeScreen = windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact,
                     )
                 }
             }
@@ -90,41 +92,44 @@ fun DetailsScreen(
     }
 }
 
-
 @Composable
 fun NewsCard(
     modifier: Modifier = Modifier,
     newsItem: News,
-    isLargeScreen: Boolean = false
+    isLargeScreen: Boolean = false,
 ) {
     Card(
-        modifier = modifier
-            .padding(8.dp),
+        modifier =
+            modifier
+                .padding(8.dp),
         elevation = CardDefaults.cardElevation(10.dp),
-        shape = RoundedCornerShape(8.dp)
+        shape = RoundedCornerShape(8.dp),
     ) {
         if (isLargeScreen) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(6.dp),
-                verticalAlignment = Alignment.CenterVertically
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column(
                     modifier = Modifier.weight(1f),
-                    verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
+                    verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center,
                 ) {
                     Text(text = newsItem.title, fontWeight = FontWeight.Bold, fontSize = 20.sp)
                     Text(text = newsItem.content, modifier = Modifier.padding(top = 6.dp))
                     androidx.compose.material.Text(
-                        text = buildString {
-                            append(newsItem.author)
-                            append(", ")
-                            append(newsItem.date)
-                            append(", ")
-                            append(newsItem.time)
-                        },
-                        modifier = Modifier.padding(top = 6.dp), fontSize = 10.sp
+                        text =
+                            buildString {
+                                append(newsItem.author)
+                                append(", ")
+                                append(newsItem.date)
+                                append(", ")
+                                append(newsItem.time)
+                            },
+                        modifier = Modifier.padding(top = 6.dp),
+                        fontSize = 10.sp,
                     )
                 }
                 SubcomposeAsyncImage(
@@ -132,54 +137,59 @@ fun NewsCard(
                     loading = {
                         Box(
                             modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
+                            contentAlignment = Alignment.Center,
                         ) {
                             CircularProgressIndicator()
                         }
                     },
-                    modifier = Modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
-                        .padding(start = 6.dp),
+                    modifier =
+                        Modifier
+                            .weight(1f)
+                            .align(Alignment.CenterVertically)
+                            .padding(start = 6.dp),
                     contentScale = ContentScale.FillWidth,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
         } else {
             Column(
                 horizontalAlignment = Alignment.Start,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(6.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(6.dp),
             ) {
                 Text(text = newsItem.title, fontWeight = FontWeight.Bold, fontSize = 20.sp)
                 Text(text = newsItem.content, modifier = Modifier.padding(top = 6.dp))
                 androidx.compose.material.Text(
-                    text = buildString {
-                        append(newsItem.author)
-                        append(", ")
-                        append(newsItem.date)
-                        append(", ")
-                        append(newsItem.time)
-                    },
-                    modifier = Modifier.padding(top = 6.dp), fontSize = 10.sp
+                    text =
+                        buildString {
+                            append(newsItem.author)
+                            append(", ")
+                            append(newsItem.date)
+                            append(", ")
+                            append(newsItem.time)
+                        },
+                    modifier = Modifier.padding(top = 6.dp),
+                    fontSize = 10.sp,
                 )
                 SubcomposeAsyncImage(
                     model = newsItem.imageUrl,
                     loading = {
                         Box(
                             modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
+                            contentAlignment = Alignment.Center,
                         ) {
                             CircularProgressIndicator()
                         }
                     },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.CenterHorizontally)
-                        .padding(top = 6.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.CenterHorizontally)
+                            .padding(top = 6.dp),
                     contentScale = ContentScale.FillWidth,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
         }
