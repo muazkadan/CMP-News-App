@@ -60,11 +60,12 @@ koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
 
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
 coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil3" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil3" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil3" }
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-json", "ktor-client-logging", "ktor-client-serialization", "ktor-client-content-negotiation", "ktor-serialization-kotlinx-json"]
-coil-common = ["coil-compose", "coil-compose-core", "coil-network-ktor"]
+coil-common = ["coil-compose", "coil-compose-core"]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -61,6 +61,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
             implementation(libs.koin.android)
+            implementation(libs.coil.network.okhttp)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -83,15 +84,18 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.coil.network.ktor)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.ktor.client.java)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.coil.network.okhttp)
         }
 
         wasmJsMain.dependencies {
             implementation(libs.ktor.client.js)
+            implementation(libs.coil.network.ktor)
         }
     }
 }

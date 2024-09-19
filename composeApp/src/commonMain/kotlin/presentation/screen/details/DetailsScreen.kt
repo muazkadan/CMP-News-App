@@ -37,11 +37,9 @@ import androidx.navigation.NavController
 import coil3.compose.SubcomposeAsyncImage
 import data.model.News
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(
     ExperimentalMaterial3Api::class,
-    KoinExperimentalAPI::class,
     ExperimentalMaterial3WindowSizeClassApi::class,
 )
 @Composable
